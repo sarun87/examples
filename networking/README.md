@@ -24,3 +24,24 @@ Output of the "ip a" command is recorded as below:
 Notice the difference in the o/p of "ip a" by the container in both cases
 
 [Reference](https://www.redhat.com/archives/libvir-list/2008-January/msg00444.html)
+
+## docker_point2point.sh
+Script file to demonstrate and understand networking with containers.
+The script creates two docker containers without networking followed by
+adding the ends of the veth pair to each of the containers.
+To run the script just execute the script as follows
+
+> ./docker_point2point.sh
+
+## docker_point2point.go
+Source code to demonstrate and understand networking with containers (in go).
+First pass implementation of just directly executing the same commands that
+the shell script executes.
+Next steps would be to use netlink directly to perform linux networking operations.
+Compile the code in go as follows
+
+> go build docker_point2point.go
+
+Run the program as follows
+
+> ./docker_point2point
