@@ -33,6 +33,10 @@ To run the script just execute the script as follows
 
 > ./docker_point2point.sh
 
+To explore the internals, use "ip netns", "ip netns exec" and "docker exec"
+commands. You could even install tcpdump within the container & capture
+packets.
+
 ## docker_point2point.go
 Source code to demonstrate and understand networking with containers (in go).
 First pass implementation of just directly executing the same commands that
