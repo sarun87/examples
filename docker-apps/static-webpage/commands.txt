@@ -1,0 +1,9 @@
+docker build -t arun-nginx:v1 .
+"docker run -name arun-nginx -d -p 9280:80 arun-nginx:v1
+curl http://127.0.0.1:9280
+
+echo "docker tag arun-nginx:v1 <dockerhub_username>/<repository>:nginx-v1
+echo "docker login"
+
+echo "docker push <dockerhub_username>/<repository>:nginx-v1"
+
