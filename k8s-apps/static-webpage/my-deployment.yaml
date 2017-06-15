@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-arun-deployment
+  namespace: arun
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx-arun
+    spec:
+      containers:
+      - name: arun-nginx-server
+        image: <dockerhub_username>/<repository>:nginx-v1
+        ports:
+        - containerPort: 80

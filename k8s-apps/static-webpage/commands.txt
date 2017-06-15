@@ -1,0 +1,17 @@
+1. Create your ns
+kubectl create ns arun
+kubectl get ns
+
+2. Deploy your app
+kubectl create -f my-deployment.yaml
+kubectl get deploy --namespace=arun
+
+3. Deploy a service
+kubectl create -f my-service.yaml
+
+4. Run kube proxy
+kubectl proxy
+
+4. Test your service
+curl http://127.0.0.1:8001/api/v1/proxy/namespaces/arun/services/nginx-arun-svc/
+
