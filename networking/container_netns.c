@@ -32,6 +32,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  *
  */
+#define _GNU_SOURCE
 
 /* System includes */
 #include <stdio.h>
@@ -42,29 +43,18 @@
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
+#include <sched.h>
 
 /* Defines */
 #define true 1
 #define false 0
 
 /* Functions */
-static void child_function()
+static int child_function()
 {
-    int res;
-
-    /* mount /proc */
-    res = mount("lxcproc", "/proc", "proc", 0, NULL);
-    if(0 != res)
-    {
-        printf("Child: mount failed with rc = %d and errno = %d\n", res, errno);
-        exit(1);
-    }
-    else
-    {
-        printf("Child: mount successful\n");
-    }
     system("ps -aef > /tmp/eg_container_ps.out");
     system("ip a > /tmp/eg_container_ipa.out");
+    return 0;
 }
 
 int main(int argc, char **argv)
