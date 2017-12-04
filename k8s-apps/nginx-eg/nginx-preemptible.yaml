@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-preemptible-deploy
+  labels:
+    deploy: nginx-preemptible
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deploy: nginx-preemptible
+  template:
+    metadata:
+      labels:
+        app: nginx
+        deploy: nginx-preemptible
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.9.1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: mydir
+          mountPath: /usr/share/nginx/html
+      initContainers:
+      - name: install
+        image: busybox
+        command: ["sh", "-c", "echo Running on P pod: ${HOSTNAME} > /mydir/index.html"]
+        volumeMounts:
+        - name: mydir
+          mountPath: "/mydir"
+      volumes:
+      - name: mydir
+        emptyDir: {}
+      nodeSelector:
+        cloud.google.com/gke-preemptible: "true"

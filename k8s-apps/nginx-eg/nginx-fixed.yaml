@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-fixed-deploy
+  labels:
+    deploy: nginx-fixed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deploy: nginx-fixed
+  template:
+    metadata:
+      labels:
+        app: nginx
+        deploy: nginx-fixed
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.9.1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: mydir
+          mountPath: /usr/share/nginx/html
+      initContainers:
+      - name: install
+        image: busybox
+        command: ["sh", "-c", "echo Running on F pod: ${HOSTNAME} > /mydir/index.html"]
+        volumeMounts:
+        - name: mydir
+          mountPath: "/mydir"
+      volumes:
+      - name: mydir
+        emptyDir: {}
+      nodeSelector:
+        cloud.google.com/gke-nodepool: "fixed-pool"
