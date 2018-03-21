@@ -1,0 +1,11 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nginx-allow-all
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: nginx
+  ingress:
+  - {}
