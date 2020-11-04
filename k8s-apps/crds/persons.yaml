@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: phonebook
+
+---
+apiVersion: "alpha.phonebookcrd/v1alpha1"
+kind: Person
+metadata:
+  name: person1
+  namespace: phonebook
+spec:
+  firstName: "John"
+  lastName: "Smith"
+  email: "john.smith@john.com"
+  phone: "1234567890"
+
+---
+apiVersion: "alpha.phonebookcrd/v1alpha1"
+kind: Person
+metadata:
+  name: person2
+  namespace: phonebook
+spec:
+  firstName: "Bob"
+  lastName: "Alice"
+  email: "bob.alice@bob.com"
+  phone: "0987654321"
+
+---
+apiVersion: "alpha.phonebookcrd/v1alpha1"
+kind: Person
+metadata:
+  name: person3
+  namespace: phonebook
+spec:
+  firstName: "Jane"
+  lastName: "Doe"
+  email: "jane.doe@jane.com"
+  address: "unknown"
